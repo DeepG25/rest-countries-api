@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
+const fetchCountries = require('../helpers/countries');
+
 router.get('/', (req, res, next) => {
-    res.json({"message": "All countries Details"});
+    fetchCountries(function(data) {
+        res
+        .status(200)
+        .json(data);
+    });
 });
 
 router.get('/:country', (req, res, next) => {
     const country = req.params.country;
-    res.json({"message": `${country} Details`});
+    res
+    .status(200)
+    .json({"message": `${country} Details`});
 });
 
 module.exports = router;
