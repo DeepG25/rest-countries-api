@@ -1,0 +1,24 @@
+{
+  "name": "rest-countries-api",
+  "version": "1.0.0",
+  "description": "It is the API that provides the information about the countries and their other details",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "rest-countries",
+    "Javascript API"
+  ],
+  "author": "Deep Godhani",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
