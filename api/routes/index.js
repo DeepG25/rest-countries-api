@@ -9,4 +9,16 @@ router.get('/', (req, res, next) => {
 
 router.use('/countries', countriesRoutes);
 
+router.use((req, res, next) => {
+    let error = new Error("Not Found");
+    error.status = 404;
+    next(error);
+});
+
+router.use((error, req, res, next) => {
+    res
+    .status(error.status || 500)
+    .json({"error" : error.message});
+});
+
 module.exports = router;
