@@ -11,27 +11,18 @@ function fetchCountries(callback) {
     let allCountriesData;
 
     fs.readFile(API_URLS.all, 'utf8', (error, data) => {
-        allCountriesData = cleanData(data);
+        allCountriesData = JSON.parse(data);
         callback(allCountriesData);
     });
 }
 
-function fetchCountry(country, callback) {
+function fetchCountryBy(parameter, data, callback) {
     
     fetchCountries((allCountriesData) => {
         let countryData = {};
-        country = country.toLowerCase();
+        data = data.toLowerCase();
 
-        for(let i=0;i<allCountriesData.length;i++)
-        {
-            if(allCountriesData[i].name.toLowerCase() === country)
-            {
-                countryData = allCountriesData[i];
-                break;
-            }
-        }
-        console.log(country, countryData);
-
+        countryData = allCountriesData.filter(x => x[parameter].toLowerCase() === data);
         callback(countryData);
     });
 }
@@ -58,4 +49,4 @@ function cleanData(data) {
     return allCountriesData;
 }
 
-module.exports = { fetchCountries, fetchCountry };
+module.exports = { fetchCountries, fetchCountryBy };

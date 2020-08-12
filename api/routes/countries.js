@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { fetchCountries, fetchCountry } = require('../helpers/countries');
+const { fetchCountries, fetchCountryBy } = require('../helpers/countries');
 
 router.get('/', (req, res, next) => {
     fetchCountries((data) => {
@@ -13,7 +13,16 @@ router.get('/', (req, res, next) => {
 
 router.get('/name/:country', (req, res, next) => {
     const country = req.params.country;
-    fetchCountry(country, (data) => {
+    fetchCountryBy("name", country, (data) => {
+        res
+        .status(200)
+        .json(data);
+    });
+});
+
+router.get('/code/:countryCode', (req, res, next) => {
+    const countryCode = req.params.countryCode;
+    fetchCountryBy("alpha2Code", countryCode, (data) => {
         res
         .status(200)
         .json(data);
